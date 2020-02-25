@@ -42,13 +42,16 @@ function Form(props){
     setIsExpanded(false);
   };
 
-  function handleEnter(event){
+  function handleEnter(event, key){
     if (event.key !== 'Enter')
     {
       return;
     }
     else {
-      let newToDoItem = event.target.value;
+      let newToDoItem = {
+        key: uuid(),
+        content: event.target.value
+      }
       event.preventDefault(); // Prevent newline from being added
       setToDoItems(prevToDoItems => [...prevToDoItems, newToDoItem])
       setContent("");
@@ -68,6 +71,7 @@ function Form(props){
     setIsExpanded(false);
     setTitle("");
     setContent("");
+    setToDoItems([]);
   }
 
   function changeType(){
@@ -79,17 +83,20 @@ function Form(props){
     <div onClick={expandForm} ref={form}>
       <form className="create-note">
 
+        {/* Show Title input when form is clicked */}
         {isExpanded ? <input onChange={changeTitle} value={title} name="title" autoComplete="off" autoFocus placeholder="Title" /> : null}
 
-        {toDoItems.map(toDoItem => <ToDoItem toDoItem={toDoItem}/>)}
+        {/* This section of code does two things */}
+        {toDoItems.map(toDoItem => <ToDoItem key={toDoItem.key} toDoItem={toDoItem.content}/>)}
         <div className="todo-wrapper add-todo">
           {isList ? <AddIcon className="add-icon"/> : null}
-          <TextareaAutosize onChange={changeContent} value={content} name={isList ? "listItem" : "content"} placeholder={isList ? "List Item" : "Take a note..."} minRows={isExpanded && !isList ? 3 : 1} onKeyPress={isList ? handleEnter : null}/>
+          <TextareaAutosize onChange={changeContent} onKeyPress={isList ? handleEnter : null} value={content} name={isList ? "listItem" : "content"} placeholder={isList ? "List Item" : "Take a note..."} minRows={isExpanded && !isList ? 3 : 1}/>
         </div>
 
         <Zoom in={isExpanded ? true : false}>
           <Fab onClick={event => {
-            props.addNote(event, {key: uuid(), title: title, content: content});
+            isList ? props.addToDoLists(event, {key: uuid(), title: title, content: toDoItems}) : props.addNote(event, {key: uuid(), title: title, content: content});
+            setIsList(false);
             resetForm(event);
           }} className="submit">
             <AddIcon />
