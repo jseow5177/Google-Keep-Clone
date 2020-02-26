@@ -130,13 +130,26 @@ form.create-note .make-list {
   outline: 0 solid transparent;
 }
 
+.title {
+  font-weight: bold;
+}
+
 .title:empty::before {
   content: "Title";
   opacity: 0.3;
 }
 
+.content {
+  line-height: 1.5;
+}
+
 .content:empty::before {
   content: "Content";
+  opacity: 0.3;
+}
+
+.todoitem:empty::before {
+  content: "Empty List";
   opacity: 0.3;
 }
 
@@ -150,7 +163,7 @@ form.create-note .make-list {
   display: flex;
 }
 
-.todo-wrapper p {
+.todo-item {
   margin-bottom: 5px;
   padding-top: 10px;
 }

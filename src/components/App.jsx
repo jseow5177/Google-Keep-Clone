@@ -65,7 +65,7 @@ function App() {
       <Form addNote={addNote} addToDoLists={addToDoLists}/>
       <div className="wrapper">
         {items.map(item => <Note key={item.key} id={item.key} title={item.title} content={item.content} deleteNote={deleteNote} updateTitle={updateTitle} updateContent={updateContent}/>)}
-        {toDoLists.map(toDoList => <ToDoList key={toDoList.key} id={toDoList.key} title={toDoList.title} content={toDoList.content} deleteToDoList={deleteToDoList} deleteToDoItem={deleteToDoItem} updateTitle={updateTitle} updateContent={updateContent}/>)}
+        {toDoLists.map(toDoList => <ToDoList key={toDoList.key} noteId={toDoList.key} title={toDoList.title} content={toDoList.content} deleteToDoList={deleteToDoList} deleteToDoItem={deleteToDoItem} updateTitle={updateTitle} updateContent={updateContent}/>)}
       </div>
     </div>
   );
