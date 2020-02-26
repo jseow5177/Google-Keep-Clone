@@ -3,6 +3,7 @@ import Header from "./Header";
 import Note from "./Note";
 import ToDoList from "./ToDoList";
 import Form from "./Form";
+import uuid from 'react-uuid';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -49,6 +50,27 @@ function App() {
     setToDoLists(prevToDoLists => prevToDoLists.filter(oldLists => oldLists.key !== listId));
   }
 
+  function changeToDoItem(event, listId, itemId)
+  {
+    
+  }
+
+  function addToDoItem(event, listId) {
+    if (event.key !== 'Enter')
+    {
+      return;
+    }
+    else {
+      setToDoLists(prevToDoLists => {
+        let foundListIndex = prevToDoLists.findIndex(toDoLists => toDoLists.key === listId);
+        prevToDoLists[foundListIndex].content = [...prevToDoLists[foundListIndex].content, {key: uuid(), content: event.target.value}];
+        return [...prevToDoLists]
+      })
+      event.preventDefault();
+      return ""
+    }
+  }
+
   function deleteToDoItem(event, listId, itemId)
   {
     setToDoLists(prevToDoLists => {
@@ -65,7 +87,7 @@ function App() {
       <Form addNote={addNote} addToDoLists={addToDoLists}/>
       <div className="wrapper">
         {items.map(item => <Note key={item.key} id={item.key} title={item.title} content={item.content} deleteNote={deleteNote} updateTitle={updateTitle} updateContent={updateContent}/>)}
-        {toDoLists.map(toDoList => <ToDoList key={toDoList.key} noteId={toDoList.key} title={toDoList.title} content={toDoList.content} deleteToDoList={deleteToDoList} deleteToDoItem={deleteToDoItem} updateTitle={updateTitle} updateContent={updateContent}/>)}
+        {toDoLists.map(toDoList => <ToDoList key={toDoList.key} noteId={toDoList.key} title={toDoList.title} content={toDoList.content} deleteToDoList={deleteToDoList} deleteToDoItem={deleteToDoItem} changeToDoItem={changeToDoItem} addToDoItem={addToDoItem}/>)}
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ function ToDoItem(props){
   return(
     <div className="todo-wrapper">
       <StyledCheckbox onClick={(event) => props.deleteToDoItem(event, props.noteId, props.toDoItemId)}/>
-      <ContentEditable className="editable todo-item" html={props.toDoItem} disabled={props.isClicked ? false : true} onChange={event => props.updateContent(event, props.id)} />
+      <ContentEditable className="editable todo-item" html={props.toDoItem} disabled={props.isClicked ? false : true} onChange={(event) => props.changeToDoItem(event, props.noteId, props.toDoItemId)} />
     </div>
   )
 }

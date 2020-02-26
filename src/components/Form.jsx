@@ -88,7 +88,7 @@ function Form(props){
 
         {/* This section of code does two things */}
         {toDoItems.map(toDoItem => <ToDoItem key={toDoItem.key} toDoItem={toDoItem.content}/>)}
-        <div className="todo-wrapper add-todo">
+        <div className="todo-wrapper">
           {isList ? <AddIcon className="add-icon"/> : null}
           <TextareaAutosize onChange={changeContent} onKeyPress={isList ? handleEnter : null} value={content} name={isList ? "listItem" : "content"} placeholder={isList ? "List Item" : "Take a note..."} minRows={isExpanded && !isList ? 3 : 1}/>
         </div>

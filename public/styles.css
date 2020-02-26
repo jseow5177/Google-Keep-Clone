@@ -95,7 +95,7 @@ form.create-note input,
 form.create-note textarea {
   border: none;
   font-family: inherit;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   resize: none;
   outline: none;
   padding: 4px;
@@ -166,6 +166,16 @@ form.create-note .make-list {
 .todo-item {
   margin-bottom: 5px;
   padding-top: 10px;
+}
+
+.todo-input {
+  border: none;
+  font-family: inherit;
+  font-size: 1.1rem;
+  resize: none;
+  outline: none;
+  padding: 4px;
+  overflow: hidden;
 }
 
 .add-icon {
