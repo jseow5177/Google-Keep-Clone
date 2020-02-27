@@ -34,7 +34,7 @@ function Note(props){
   return(
     <div>
       <div ref={note} onClick={expandCenter} className="note" style={isClicked ? customNoteStyles : null}>
-        <ContentEditable className="editable title" html={props.title} disabled={isClicked ? false : true} onChange={event => props.updateTitle(event, props.id)}/>
+        <ContentEditable id="note" className="editable title" html={props.title} disabled={isClicked ? false : true} onChange={event => props.updateTitle(event, props.id)}/>
         <ContentEditable className="editable content" disabled={isClicked ? false : true} html={props.content} onChange={event => props.updateContent(event, props.id)}/>
         <div className="button-wrapper">
           <button onClick={() => props.deleteNote(props.id)} style={isClicked ? customButtonStyles : null}><DeleteRoundedIcon/></button>

@@ -1,5 +1,4 @@
 import React, {useState, useRef, useEffect} from "react";
-import uuid from 'react-uuid';
 import ToDoItem from './ToDoItem'
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
@@ -7,6 +6,7 @@ import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import AddIcon from '@material-ui/icons/Add';
 import NotesIcon from '@material-ui/icons/Notes';
 import TextareaAutosize from 'react-textarea-autosize';
+import uuid from 'react-uuid';
 
 function Form(props){
 
@@ -66,6 +66,18 @@ function Form(props){
     setContent(event.target.value)
   }
 
+  function editEntry(event, itemId){
+    setToDoItems(prevToDoItems => {
+      let foundToDoItem = prevToDoItems.findIndex(oldItem => oldItem.key === itemId);
+      prevToDoItems[foundToDoItem].content = event.target.value;
+      return [...prevToDoItems]
+    })
+  }
+
+  function deleteEntry(itemId){
+    setToDoItems(prevToDoItems => prevToDoItems.filter(oldItem => oldItem.key !== itemId));
+  }
+
   function resetForm(event){
     event.stopPropagation();
     setIsExpanded(false);
@@ -87,10 +99,10 @@ function Form(props){
         {isExpanded ? <input onChange={changeTitle} value={title} name="title" autoComplete="off" autoFocus placeholder="Title" /> : null}
 
         {/* This section of code does two things */}
-        {toDoItems.map(toDoItem => <ToDoItem key={toDoItem.key} toDoItem={toDoItem.content}/>)}
+        {toDoItems.map(toDoItem => <ToDoItem key={toDoItem.key} isEntry={true} toDoItemId={toDoItem.key} toDoItem={toDoItem.content} editEntry={editEntry} deleteEntry={deleteEntry}/>)}
         <div className="todo-wrapper">
           {isList ? <AddIcon className="add-icon"/> : null}
-          <TextareaAutosize onChange={changeContent} onKeyPress={isList ? handleEnter : null} value={content} name={isList ? "listItem" : "content"} placeholder={isList ? "List Item" : "Take a note..."} minRows={isExpanded && !isList ? 3 : 1}/>
+          <TextareaAutosize id="new-entry" onChange={changeContent} onKeyPress={isList ? handleEnter : null} value={content} name={isList ? "listItem" : "content"} placeholder={isList ? "List Item" : "Take a note..."} minRows={isExpanded && !isList ? 3 : 1}/>
         </div>
 
         <Zoom in={isExpanded ? true : false}>

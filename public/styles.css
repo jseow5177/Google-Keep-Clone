@@ -128,6 +128,7 @@ form.create-note .make-list {
 .editable {
   margin-bottom: 10px;
   outline: 0 solid transparent;
+  width: 100%;
 }
 
 .title {
