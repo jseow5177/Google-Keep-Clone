@@ -22,11 +22,3 @@ Run `npm start` for a dev server. Navigate to [http://localhost:3000](http://loc
 
 ## App demo
 ![app-demo](./app-demo.gif)
-
-## Next steps
-<ol>
-  <li> Code refactoring </li>
-  <li> Mobile-friendly with Bootstrap </li>
-  <li> Implement dark theme </li>
-  <li> Develop backend system with Node, Express and MongoDB </li>
-</ol>  
